@@ -1,25 +1,50 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import ReactMarkdown from "react-markdown";
+import rehypeHighlight from "rehype-highlight";
+import "highlight.js/styles/github.css"; // หรือ dark.css, atom-one-dark ฯลฯ
 
-function App() {
+export default function ChatUI() {
+  const [messages, setMessages] = useState([
+    { role: "user", content: "ข้าวซอยคืออะไร?" },
+    {
+      role: "assistant",
+      content: `
+## ข้าวซอย
+
+ข้าวซอยเป็นอาหารพื้นเมืองของภาคเหนือ
+
+### วิธีทำ
+
+1. ต้มไก่กับกะทิ
+2. ใส่เครื่องแกง
+
+\`\`\`bash
+npm install curry
+\`\`\`
+      `,
+    },
+  ]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div style={{ padding: 20 }}>
+      {messages.map((msg, i) => (
+        <div
+          key={i}
+          style={{
+            maxWidth: "75%",
+            marginBottom: 10,
+            alignSelf: msg.role === "user" ? "flex-end" : "flex-start",
+            background: msg.role === "user" ? "#d1e7dd" : "#f8f9fa",
+            borderRadius: "12px",
+            padding: "10px 14px",
+            whiteSpace: "pre-wrap",
+          }}
         >
-          Learn React
-        </a>
-      </header>
+          <ReactMarkdown rehypePlugins={[rehypeHighlight]}>
+            {msg.content}
+          </ReactMarkdown>
+        </div>
+      ))}
     </div>
   );
 }
-
-export default App;
