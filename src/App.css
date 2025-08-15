@@ -1,3 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
 .App {
   text-align: center;
 }
@@ -32,7 +37,31 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+
+.markdown-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.markdown-table th,
+.markdown-table td {
+  border: 1px solid #e5e7eb;
+  padding: 10px 14px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.markdown-table th {
+  background-color: #f3f4f6;
+  font-weight: 600;
 }
